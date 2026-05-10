@@ -17,6 +17,17 @@ router.get('/', async () => {
   }
 })
 
+// Auth
+const AuthController = () => import('#controllers/auth/auth_controller')
+router.post('/register', [AuthController, 'register'])
+router.post('/login', [AuthController, 'login'])
+router.get('/me', [AuthController, 'me']).use(middleware.auth())
+
+// OAuth
+// OAuth
+router.get('/oauth/google', [AuthController, 'googleRedirect'])
+router.get('/oauth/google/callback', [AuthController, 'googleCallback'])
+
 router
   .group(() => {
     router

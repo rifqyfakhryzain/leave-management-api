@@ -18,7 +18,7 @@ export default class extends BaseSchema {
         .unsigned()
         .nullable()
         .references('id')
-        .inTable('user')
+        .inTable('users')
         .onDelete('SET NULL')
       table.timestamp('created_at')
       table.timestamp('updated_at')
