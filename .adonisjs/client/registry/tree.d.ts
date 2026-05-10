@@ -3,6 +3,11 @@ import type { routes } from './index.ts'
 
 export interface ApiDefinition {
   auth: {
+    register: typeof routes['auth.register']
+    login: typeof routes['auth.login']
+    me: typeof routes['auth.me']
+    googleRedirect: typeof routes['auth.google_redirect']
+    googleCallback: typeof routes['auth.google_callback']
     newAccount: {
       store: typeof routes['auth.new_account.store']
     }

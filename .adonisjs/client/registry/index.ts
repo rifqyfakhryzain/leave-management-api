@@ -6,6 +6,36 @@ import type { ApiDefinition } from './tree.d.ts'
 const placeholder: any = {}
 
 const routes = {
+  'auth.register': {
+    methods: ["POST"],
+    pattern: '/register',
+    tokens: [{"old":"/register","type":0,"val":"register","end":""}],
+    types: placeholder as Registry['auth.register']['types'],
+  },
+  'auth.login': {
+    methods: ["POST"],
+    pattern: '/login',
+    tokens: [{"old":"/login","type":0,"val":"login","end":""}],
+    types: placeholder as Registry['auth.login']['types'],
+  },
+  'auth.me': {
+    methods: ["GET","HEAD"],
+    pattern: '/me',
+    tokens: [{"old":"/me","type":0,"val":"me","end":""}],
+    types: placeholder as Registry['auth.me']['types'],
+  },
+  'auth.google_redirect': {
+    methods: ["GET","HEAD"],
+    pattern: '/oauth/google',
+    tokens: [{"old":"/oauth/google","type":0,"val":"oauth","end":""},{"old":"/oauth/google","type":0,"val":"google","end":""}],
+    types: placeholder as Registry['auth.google_redirect']['types'],
+  },
+  'auth.google_callback': {
+    methods: ["GET","HEAD"],
+    pattern: '/oauth/google/callback',
+    tokens: [{"old":"/oauth/google/callback","type":0,"val":"oauth","end":""},{"old":"/oauth/google/callback","type":0,"val":"google","end":""},{"old":"/oauth/google/callback","type":0,"val":"callback","end":""}],
+    types: placeholder as Registry['auth.google_callback']['types'],
+  },
   'auth.new_account.store': {
     methods: ["POST"],
     pattern: '/api/v1/auth/signup',

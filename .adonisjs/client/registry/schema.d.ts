@@ -7,6 +7,66 @@ import type { InferInput, SimpleError } from '@vinejs/vine/types'
 export type ParamValue = string | number | bigint | boolean
 
 export interface Registry {
+  'auth.register': {
+    methods: ["POST"]
+    pattern: '/register'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#validators/auth_validators').registerValidator)>>
+      paramsTuple: []
+      params: {}
+      query: ExtractQuery<InferInput<(typeof import('#validators/auth_validators').registerValidator)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/auth/auth_controller').default['register']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/auth/auth_controller').default['register']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
+  'auth.login': {
+    methods: ["POST"]
+    pattern: '/login'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#validators/auth_validators').loginValidator)>>
+      paramsTuple: []
+      params: {}
+      query: ExtractQuery<InferInput<(typeof import('#validators/auth_validators').loginValidator)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/auth/auth_controller').default['login']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/auth/auth_controller').default['login']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
+  'auth.me': {
+    methods: ["GET","HEAD"]
+    pattern: '/me'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/auth/auth_controller').default['me']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/auth/auth_controller').default['me']>>>
+    }
+  }
+  'auth.google_redirect': {
+    methods: ["GET","HEAD"]
+    pattern: '/oauth/google'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/auth/auth_controller').default['googleRedirect']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/auth/auth_controller').default['googleRedirect']>>>
+    }
+  }
+  'auth.google_callback': {
+    methods: ["GET","HEAD"]
+    pattern: '/oauth/google/callback'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/auth/auth_controller').default['googleCallback']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/auth/auth_controller').default['googleCallback']>>>
+    }
+  }
   'auth.new_account.store': {
     methods: ["POST"]
     pattern: '/api/v1/auth/signup'

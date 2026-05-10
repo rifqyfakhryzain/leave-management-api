@@ -32,6 +32,33 @@ export class AuthAccessTokenSchema extends BaseModel {
   declare updatedAt: DateTime | null
 }
 
+export class LeaveRequestSchema extends BaseModel {
+  static $columns = ['approvedBy', 'attachment', 'createdAt', 'endDate', 'id', 'reason', 'startDate', 'status', 'totalDays', 'updatedAt', 'userId'] as const
+  $columns = LeaveRequestSchema.$columns
+  @column()
+  declare approvedBy: number | null
+  @column()
+  declare attachment: string | null
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime | null
+  @column.date()
+  declare endDate: DateTime
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare reason: string | null
+  @column.date()
+  declare startDate: DateTime
+  @column()
+  declare status: string | null
+  @column()
+  declare totalDays: number | null
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+  @column()
+  declare userId: number | null
+}
+
 export class UserSchema extends BaseModel {
   static $columns = ['createdAt', 'email', 'fullName', 'id', 'password', 'role', 'updatedAt'] as const
   $columns = UserSchema.$columns
