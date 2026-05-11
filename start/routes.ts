@@ -24,10 +24,25 @@ router.post('/login', [AuthController, 'login'])
 router.get('/me', [AuthController, 'me']).use(middleware.auth())
 
 // OAuth
-// OAuth
 router.get('/oauth/google', [AuthController, 'googleRedirect'])
 router.get('/oauth/google/callback', [AuthController, 'googleCallback'])
 
+// Leave Request
+const LeaveRequestsController = () =>
+  import('#controllers/leave_requests/leave_requests_controller')
+router
+  .group(() => {
+    router.get('/leave-requests', [LeaveRequestsController, 'index'])
+
+    router.post('/leave-requests', [LeaveRequestsController, 'store'])
+
+    router.patch('/leave-requests/:id/approve', [LeaveRequestsController, 'approve'])
+
+    router.patch('/leave-requests/:id/reject', [LeaveRequestsController, 'reject'])
+  })
+  .use(middleware.auth())
+
+//
 router
   .group(() => {
     router
