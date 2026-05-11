@@ -12,7 +12,7 @@ export default class LeaveRequest extends BaseModel {
   declare userId: number
 
   @column.date()
-  declare starDate: DateTime
+  declare startDate: DateTime
 
   @column.date()
   declare endDate: DateTime
@@ -24,20 +24,25 @@ export default class LeaveRequest extends BaseModel {
   declare reason: string
 
   @column()
-  declare attachment: string | null
+  declare attachment: string
 
   @column()
-  declare status: string
+  declare status: 'pending' | 'approved' | 'rejected'
 
   @column()
   declare approvedBy: number | null
+
+  @belongsTo(() => User)
+  declare user: BelongsTo<typeof User>
+
+  @belongsTo(() => User, {
+    foreignKey: 'approvedBy',
+  })
+  declare approver: BelongsTo<typeof User>
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
-  declare uppdatedAt: DateTime | null
-
-  @belongsTo(() => User)
-  declare user: BelongsTo<typeof User>
+  declare updatedAt: DateTime
 }

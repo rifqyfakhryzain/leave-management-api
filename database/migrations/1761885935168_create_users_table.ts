@@ -10,6 +10,7 @@ export default class extends BaseSchema {
       table.string('email', 254).notNullable().unique()
       table.string('password').notNullable()
       table.enum('role', ['admin', 'employee']).defaultTo('employee')
+      table.integer('leave_balance').defaultTo(12)
       table.timestamp('created_at').notNullable()
       table.timestamp('updated_at').nullable()
     })
