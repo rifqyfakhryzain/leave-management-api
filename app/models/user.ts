@@ -6,13 +6,16 @@ import { type AccessToken, DbAccessTokensProvider } from '@adonisjs/auth/access_
 
 import LeaveRequest from './leave_request.js'
 
-import { hasMany } from '@adonisjs/lucid/orm'
+import { hasMany, column } from '@adonisjs/lucid/orm'
 import type { HasMany } from '@adonisjs/lucid/types/relations'
 
 export default class User extends compose(UserSchema, withAuthFinder(hash)) {
   static accessTokens = DbAccessTokensProvider.forModel(User)
 
   declare currentAccessToken?: AccessToken
+
+  @column()
+  declare leaveBalance: number
 
   @hasMany(() => LeaveRequest)
   declare leaveRequests: HasMany<typeof LeaveRequest>
@@ -23,7 +26,6 @@ export default class User extends compose(UserSchema, withAuthFinder(hash)) {
     if (first && last) {
       return `${first.charAt(0)}${last.charAt(0)}`.toUpperCase()
     }
-
     return `${first.slice(0, 2)}`.toUpperCase()
   }
 }
