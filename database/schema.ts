@@ -38,29 +38,29 @@ export class LeaveRequestSchema extends BaseModel {
   @column()
   declare approvedBy: number | null
   @column()
-  declare attachment: string | null
+  declare attachment: string
   @column.dateTime({ autoCreate: true })
-  declare createdAt: DateTime | null
+  declare createdAt: DateTime
   @column.date()
   declare endDate: DateTime
   @column({ isPrimary: true })
   declare id: number
   @column()
-  declare reason: string | null
+  declare reason: string
   @column.date()
   declare startDate: DateTime
   @column()
   declare status: string | null
   @column()
-  declare totalDays: number | null
+  declare totalDays: number
   @column.dateTime({ autoCreate: true, autoUpdate: true })
-  declare updatedAt: DateTime | null
+  declare updatedAt: DateTime
   @column()
-  declare userId: number | null
+  declare userId: number
 }
 
 export class UserSchema extends BaseModel {
-  static $columns = ['createdAt', 'email', 'fullName', 'id', 'password', 'role', 'updatedAt'] as const
+  static $columns = ['createdAt', 'email', 'fullName', 'id', 'leaveBalance', 'password', 'role', 'updatedAt'] as const
   $columns = UserSchema.$columns
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
@@ -70,6 +70,8 @@ export class UserSchema extends BaseModel {
   declare fullName: string | null
   @column({ isPrimary: true })
   declare id: number
+  @column()
+  declare leaveBalance: number | null
   @column({ serializeAs: null })
   declare password: string
   @column()

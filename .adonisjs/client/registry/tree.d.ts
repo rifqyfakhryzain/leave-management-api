@@ -15,6 +15,12 @@ export interface ApiDefinition {
       store: typeof routes['auth.access_tokens.store']
     }
   }
+  leaveRequests: {
+    index: typeof routes['leave_requests.index']
+    store: typeof routes['leave_requests.store']
+    approve: typeof routes['leave_requests.approve']
+    reject: typeof routes['leave_requests.reject']
+  }
   profile: {
     profile: {
       show: typeof routes['profile.profile.show']

@@ -10,4 +10,7 @@ export const controllers = {
   },
   NewAccount: () => import('#controllers/new_account_controller'),
   Profile: () => import('#controllers/profile_controller'),
+  leaveRequests: {
+    LeaveRequests: () => import('#controllers/leave_requests/leave_requests_controller'),
+  },
 }

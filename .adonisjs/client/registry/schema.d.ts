@@ -67,6 +67,54 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/auth/auth_controller').default['googleCallback']>>>
     }
   }
+  'leave_requests.index': {
+    methods: ["GET","HEAD"]
+    pattern: '/leave-requests'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/leave_requests/leave_requests_controller').default['index']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/leave_requests/leave_requests_controller').default['index']>>>
+    }
+  }
+  'leave_requests.store': {
+    methods: ["POST"]
+    pattern: '/leave-requests'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#validators/leave_request_validator').createLeaveRequestValidator)>>
+      paramsTuple: []
+      params: {}
+      query: ExtractQuery<InferInput<(typeof import('#validators/leave_request_validator').createLeaveRequestValidator)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/leave_requests/leave_requests_controller').default['store']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/leave_requests/leave_requests_controller').default['store']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
+  'leave_requests.approve': {
+    methods: ["PATCH"]
+    pattern: '/leave-requests/:id/approve'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/leave_requests/leave_requests_controller').default['approve']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/leave_requests/leave_requests_controller').default['approve']>>>
+    }
+  }
+  'leave_requests.reject': {
+    methods: ["PATCH"]
+    pattern: '/leave-requests/:id/reject'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/leave_requests/leave_requests_controller').default['reject']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/leave_requests/leave_requests_controller').default['reject']>>>
+    }
+  }
   'auth.new_account.store': {
     methods: ["POST"]
     pattern: '/api/v1/auth/signup'
